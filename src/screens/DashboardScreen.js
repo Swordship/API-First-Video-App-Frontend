@@ -7,7 +7,7 @@ import {
   ActivityIndicator,
   RefreshControl,
   TouchableOpacity,
-  Alert,
+  Alert,  // FIXED: Added Alert import
 } from 'react-native';
 import api from '../services/api';
 import VideoTile from '../components/VideoTile';
