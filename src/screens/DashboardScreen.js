@@ -7,7 +7,8 @@ import {
   ActivityIndicator,
   RefreshControl,
   TouchableOpacity,
-  Alert,  // FIXED: Added Alert import
+  Alert,
+  StatusBar,
 } from 'react-native';
 import api from '../services/api';
 import VideoTile from '../components/VideoTile';
@@ -67,11 +68,19 @@ export default function DashboardScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+      
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Dashboard</Text>
-        <TouchableOpacity onPress={goToSettings}>
-          <Text style={styles.settingsButton}>⚙️</Text>
+        <View>
+          <Text style={styles.headerTitle}>Dashboard</Text>
+          <Text style={styles.headerSubtitle}>Watch & Learn</Text>
+        </View>
+        <TouchableOpacity 
+          onPress={goToSettings}
+          style={styles.settingsButton}
+        >
+          <Text style={styles.settingsIcon}>⚙️</Text>
         </TouchableOpacity>
       </View>
 
@@ -87,13 +96,21 @@ export default function DashboardScreen({ navigation }) {
         )}
         contentContainerStyle={styles.listContent}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          <RefreshControl 
+            refreshing={refreshing} 
+            onRefresh={onRefresh}
+            tintColor="#007AFF"
+            colors={['#007AFF']}
+          />
         }
         ListEmptyComponent={
           <View style={styles.emptyContainer}>
+            <Text style={styles.emptyIcon}>📹</Text>
             <Text style={styles.emptyText}>No videos available</Text>
+            <Text style={styles.emptySubtext}>Pull down to refresh</Text>
           </View>
         }
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );
@@ -102,18 +119,19 @@ export default function DashboardScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#f8f9fa',
   },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#f8f9fa',
   },
   loadingText: {
-    marginTop: 10,
+    marginTop: 12,
     fontSize: 16,
     color: '#666',
+    fontWeight: '500',
   },
   header: {
     flexDirection: 'row',
@@ -123,25 +141,56 @@ const styles = StyleSheet.create({
     paddingTop: 60, // Account for status bar
     backgroundColor: '#fff',
     borderBottomWidth: 1,
-    borderBottomColor: '#e0e0e0',
+    borderBottomColor: '#e8e8e8',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 3,
   },
   headerTitle: {
-    fontSize: 28,
+    fontSize: 32,
     fontWeight: 'bold',
-    color: '#333',
+    color: '#1a1a1a',
+    letterSpacing: -0.5,
+  },
+  headerSubtitle: {
+    fontSize: 14,
+    color: '#666',
+    marginTop: 2,
+    fontWeight: '500',
   },
   settingsButton: {
-    fontSize: 28,
-  },
-  listContent: {
-    padding: 15,
-  },
-  emptyContainer: {
-    padding: 40,
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: '#f5f5f5',
+    justifyContent: 'center',
     alignItems: 'center',
   },
+  settingsIcon: {
+    fontSize: 22,
+  },
+  listContent: {
+    padding: 16,
+    paddingTop: 20,
+  },
+  emptyContainer: {
+    padding: 60,
+    alignItems: 'center',
+  },
+  emptyIcon: {
+    fontSize: 48,
+    marginBottom: 12,
+  },
   emptyText: {
-    fontSize: 16,
+    fontSize: 18,
+    color: '#666',
+    fontWeight: '600',
+    marginBottom: 6,
+  },
+  emptySubtext: {
+    fontSize: 14,
     color: '#999',
   },
 });

@@ -6,7 +6,6 @@ import {
   ActivityIndicator,
   Alert,
   TouchableOpacity,
-  Linking,
   ScrollView,
 } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
@@ -56,16 +55,6 @@ export default function VideoPlayerScreen({ route, navigation }) {
     }
   };
 
-  // Open in YouTube app as fallback
-  const openInYouTube = () => {
-    if (youtubeId) {
-      Linking.openURL(`https://www.youtube.com/watch?v=${youtubeId}`)
-        .catch(() => {
-          Alert.alert('Error', 'Could not open YouTube app');
-        });
-    }
-  };
-
   useEffect(() => {
     fetchStreamUrl();
   }, []);
@@ -86,14 +75,15 @@ export default function VideoPlayerScreen({ route, navigation }) {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text style={styles.backButton}>← Back</Text>
         </TouchableOpacity>
-        <Text style={styles.title} numberOfLines={1}>
+        <Text style={styles.headerTitle} numberOfLines={1}>
           {video.title}
         </Text>
+        <View style={styles.placeholder} />
       </View>
 
       {/* Content */}
       {youtubeId ? (
-        <ScrollView style={styles.scrollView}>
+        <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
           {/* YouTube Player */}
           <View style={styles.playerWrapper}>
             <YoutubePlayer
@@ -102,13 +92,17 @@ export default function VideoPlayerScreen({ route, navigation }) {
               videoId={youtubeId}
               onChangeState={(state) => {
                 console.log('Player state:', state);
+                if (state === 'playing') {
+                  setPlaying(true);
+                } else if (state === 'paused') {
+                  setPlaying(false);
+                }
               }}
               onReady={() => {
                 console.log('YouTube player ready');
               }}
               onError={(error) => {
                 console.error('YouTube player error:', error);
-                Alert.alert('Error', 'Failed to load video. Try the YouTube app button below.');
               }}
               webViewProps={{
                 androidLayerType: 'hardware',
@@ -116,21 +110,11 @@ export default function VideoPlayerScreen({ route, navigation }) {
             />
           </View>
           
-          {/* Video Info */}
-          <View style={styles.infoContainer}>
+          {/* Video Info Card */}
+          <View style={styles.infoCard}>
             <Text style={styles.videoTitle}>{video.title}</Text>
             <Text style={styles.description}>{video.description}</Text>
           </View>
-          
-          {/* Fallback Button */}
-          <TouchableOpacity
-            style={styles.fallbackButton}
-            onPress={openInYouTube}
-          >
-            <Text style={styles.fallbackButtonText}>
-              Open in YouTube App 📺
-            </Text>
-          </TouchableOpacity>
         </ScrollView>
       ) : (
         <View style={styles.errorContainer}>
@@ -166,22 +150,29 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
     padding: 15,
     paddingTop: 50,
     backgroundColor: '#000',
     borderBottomWidth: 1,
-    borderBottomColor: '#333',
+    borderBottomColor: '#222',
   },
   backButton: {
     fontSize: 18,
     color: '#007AFF',
-    marginRight: 15,
+    fontWeight: '600',
+    width: 70,
   },
-  title: {
+  headerTitle: {
     flex: 1,
     fontSize: 16,
     fontWeight: '600',
     color: '#fff',
+    textAlign: 'center',
+    paddingHorizontal: 10,
+  },
+  placeholder: {
+    width: 70, // Balance the back button
   },
   scrollView: {
     flex: 1,
@@ -190,37 +181,22 @@ const styles = StyleSheet.create({
     backgroundColor: '#000',
     paddingTop: 10,
   },
-  infoContainer: {
-    padding: 20,
+  infoCard: {
     backgroundColor: '#1a1a1a',
+    padding: 20,
+    marginTop: 10,
   },
   videoTitle: {
     fontSize: 20,
     fontWeight: 'bold',
     color: '#fff',
-    marginBottom: 10,
+    marginBottom: 12,
+    lineHeight: 26,
   },
   description: {
-    fontSize: 14,
+    fontSize: 15,
     color: '#aaa',
-    lineHeight: 20,
-  },
-  fallbackButton: {
-    margin: 20,
-    backgroundColor: '#FF0000',
-    padding: 15,
-    borderRadius: 10,
-    alignItems: 'center',
-    shadowColor: '#FF0000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 5,
-  },
-  fallbackButtonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
+    lineHeight: 22,
   },
   errorContainer: {
     flex: 1,
@@ -237,14 +213,13 @@ const styles = StyleSheet.create({
   },
   retryButton: {
     backgroundColor: '#007AFF',
-    padding: 15,
-    borderRadius: 10,
-    minWidth: 120,
+    paddingHorizontal: 30,
+    paddingVertical: 12,
+    borderRadius: 8,
   },
   retryButtonText: {
     color: '#fff',
     fontSize: 16,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: '600',
   },
 });
