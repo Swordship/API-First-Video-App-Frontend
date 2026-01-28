@@ -1,577 +1,268 @@
 # 📱 Video Streaming App - Mobile Frontend
 
-A beautiful, secure React Native mobile application for video streaming. Features smooth navigation, JWT authentication, and seamless video playback powered by YouTube's iFrame API.
-
----
-
-## 📋 Table of Contents
-
-- [Overview](#overview)
-- [Screenshots](#screenshots)
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Configuration](#configuration)
-  - [Running the App](#running-the-app)
-- [App Architecture](#app-architecture)
-- [User Flow](#user-flow)
-- [Project Structure](#project-structure)
-- [API Integration](#api-integration)
-- [Design System](#design-system)
-- [Troubleshooting](#troubleshooting)
-- [Building for Production](#building-for-production)
-
----
-
-## 🎯 Overview
-
-This mobile application provides a complete video streaming experience with:
-
-- **Thin Client Architecture**: Zero business logic in frontend - all handled by backend API
-- **Secure Authentication**: JWT-based authentication with automatic token management
-- **Smooth Navigation**: Stack navigation with proper authentication flow
-- **Video Playback**: YouTube videos using react-native-youtube-iframe
-- **Professional UI**: Clean, modern design with smooth animations
-- **Offline Support**: JWT token persists across app restarts
-
-**Key Design Principle**: The frontend is a "thin client" - it only renders UI and makes API calls. All validation, logic, and data control happens in the backend.
-
----
-
-## 📸 Screenshots
-
-### How to Add Screenshots
-
-**1. Take Screenshots on Your Phone:**
-
-Open the app on your phone and take screenshots of:
-- Login Screen
-- Signup Screen
-- Dashboard with videos
-- Video Player playing a video
-- Settings Screen
-
-**2. Transfer Screenshots to Computer:**
-
-- **iPhone**: AirDrop to Mac or email to yourself
-- **Android**: Connect via USB or use Google Photos
-
-**3. Create Screenshots Folder:**
-
-```bash
-# In your frontend repo
-mkdir -p screenshots
-
-# Move your images there
-# Rename them clearly:
-# - 01-login.png
-# - 02-signup.png
-# - 03-dashboard.png
-# - 04-video-player.png
-# - 05-settings.png
-```
-
-**4. Add to README:**
-
-Replace the placeholder images below with your actual screenshots:
-
-```markdown
-### App Screens
+A beautiful, secure React Native mobile application for video streaming with JWT authentication and seamless YouTube video playback.
 
 <div align="center">
 
-#### Login Screen
-<img src="./screenshots/01-login.png" width="300" alt="Login Screen">
-
-Clean, simple login with email and password fields.
-
-#### Dashboard
-<img src="./screenshots/03-dashboard.png" width="300" alt="Dashboard">
-
-Shows 2 video tiles with thumbnails and descriptions. Pull to refresh.
-
-#### Video Player
-<img src="./screenshots/04-video-player.png" width="300" alt="Video Player">
-
-Full-screen video player with controls. Dark theme for better viewing.
-
-#### Settings
-<img src="./screenshots/05-settings.png" width="300" alt="Settings Screen">
-
-User profile with name, email, and logout option.
+![React Native](https://img.shields.io/badge/React_Native-0.81-61DAFB?style=for-the-badge&logo=react&logoColor=white)
+![Expo](https://img.shields.io/badge/Expo-54.0-000020?style=for-the-badge&logo=expo&logoColor=white)
+![TypeScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
 </div>
-```
-
-**5. Commit Screenshots:**
-
-```bash
-git add screenshots/
-git commit -m "docs: Add app screenshots"
-git push
-```
 
 ---
 
-### Current Screenshots
+## 📸 App Screenshots
 
-*Screenshots coming soon - follow the guide above to add yours!*
+<div align="center">
+
+### 🔐 Authentication Flow
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="./screenshots/01-login.png" width="250" alt="Login Screen"/>
+      <br/>
+      <b>Login Screen</b>
+      <br/>
+      <sub>Secure authentication with email & password</sub>
+    </td>
+    <td align="center">
+      <img src="./screenshots/02-signup.png" width="250" alt="Signup Screen"/>
+      <br/>
+      <b>Signup Screen</b>
+      <br/>
+      <sub>New user registration with validation</sub>
+    </td>
+  </tr>
+</table>
+
+### 📺 Video Experience
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="./screenshots/03-dashboard.png" width="250" alt="Dashboard"/>
+      <br/>
+      <b>Dashboard</b>
+      <br/>
+      <sub>Browse curated startup videos</sub>
+    </td>
+    <td align="center">
+      <img src="./screenshots/04-video-player.png" width="250" alt="Video Player"/>
+      <br/>
+      <b>Video Player</b>
+      <br/>
+      <sub>Full-screen playback with controls</sub>
+    </td>
+    <td align="center">
+      <img src="./screenshots/05-settings.png" width="250" alt="Settings"/>
+      <br/>
+      <b>Settings</b>
+      <br/>
+      <sub>User profile & account management</sub>
+    </td>
+  </tr>
+</table>
+
+</div>
 
 ---
 
-## ✨ Features
+## 🎯 Key Features
 
-### Authentication
+<table>
+<tr>
+<td width="50%">
 
-- ✅ **Signup**: Create account with name, email, and password
-- ✅ **Login**: Secure authentication with JWT tokens
-- ✅ **Auto-logout**: Automatic logout on token expiry (401 errors)
-- ✅ **Persistent Login**: Token saved in AsyncStorage, survives app restarts
-- ✅ **Profile View**: See your account details
-- ✅ **Logout**: Clear session and return to login
+### 🔐 Authentication
+- ✅ JWT-based secure authentication
+- ✅ Persistent login across sessions
+- ✅ Automatic token refresh
+- ✅ Secure logout with token clearing
 
-### Video Streaming
+### 📺 Video Streaming
+- ✅ YouTube video integration
+- ✅ Full playback controls
+- ✅ Smooth video transitions
+- ✅ Error handling & retry logic
 
-- ✅ **Dashboard**: Shows 2 curated videos with thumbnails and descriptions
-- ✅ **Pull to Refresh**: Refresh video list
-- ✅ **Video Playback**: Plays YouTube videos using official iFrame API
-- ✅ **Video Controls**: Play, pause, seek, volume, fullscreen
-- ✅ **Clean UI**: No YouTube branding, seamless experience
-- ✅ **Error Handling**: Graceful error messages if video fails to load
+</td>
+<td width="50%">
 
-### User Experience
+### 🎨 User Experience
+- ✅ Modern, intuitive UI design
+- ✅ Smooth navigation animations
+- ✅ Pull-to-refresh functionality
+- ✅ Loading states & error messages
 
-- ✅ **Smooth Navigation**: Stack navigation between screens
-- ✅ **Loading States**: Spinners while loading data
-- ✅ **Error Messages**: User-friendly error alerts
-- ✅ **Professional Design**: Modern UI with shadows and smooth animations
-- ✅ **Dark Theme**: Video player uses dark theme for better viewing
-- ✅ **Responsive**: Works on all phone sizes
+### ⚡ Performance
+- ✅ Optimized API calls
+- ✅ Efficient state management
+- ✅ Fast load times
+- ✅ Responsive on all devices
+
+</td>
+</tr>
+</table>
 
 ---
 
 ## 🛠️ Tech Stack
 
 | Technology | Version | Purpose |
-|------------|---------|---------|
-| **React Native** | 0.81.5 | Mobile framework |
-| **Expo** | ~54.0 | Development platform |
-| **React Navigation** | 7.x | Screen navigation |
-| **Axios** | 1.13.4 | API requests |
-| **AsyncStorage** | 2.2.0 | Local data storage |
+|:-----------|:--------|:--------|
+| **React Native** | 0.81.5 | Cross-platform mobile framework |
+| **Expo** | ~54.0 | Development & build platform |
+| **React Navigation** | 7.x | Screen navigation & routing |
+| **Axios** | 1.13.4 | HTTP client for API calls |
+| **AsyncStorage** | 2.2.0 | Local data persistence |
 | **react-native-youtube-iframe** | 2.x | YouTube video playback |
-
-### Why These Technologies?
-
-**React Native:**
-- Write once, run on iOS and Android
-- Large community and ecosystem
-- Fast development with hot reload
-- Native performance
-
-**Expo:**
-- Easy setup, no Xcode/Android Studio needed
-- Over-the-air updates
-- Great developer experience
-- Access to native APIs
-
-**React Navigation:**
-- Industry standard for navigation
-- Smooth animations
-- Easy to implement auth flow
-- Great documentation
-
-**react-native-youtube-iframe:**
-- Official YouTube iFrame API
-- No "Error 153" issues
-- Full controls support
-- Reliable and maintained
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Quick Start
 
 ### Prerequisites
 
-- **Node.js** 16+ installed
-- **npm** or **yarn**
-- **Expo Go** app on your phone:
-  - [iOS](https://apps.apple.com/app/expo-go/id982107779)
-  - [Android](https://play.google.com/store/apps/details?id=host.exp.exponent)
+- Node.js 16+ installed
+- Expo Go app on your phone ([iOS](https://apps.apple.com/app/expo-go/id982107779) | [Android](https://play.google.com/store/apps/details?id=host.exp.exponent))
 - Backend API running (see backend README)
-
----
 
 ### Installation
 
-**1. Clone the repository**
-
 ```bash
-git clone <your-frontend-repo-url>
+# Clone the repository
+git clone <your-repo-url>
 cd frontend-repo
-```
 
-**2. Install dependencies**
-
-```bash
+# Install dependencies
 npm install
-```
 
-**3. Verify installation**
-
-```bash
-npm list react-native-youtube-iframe
-# Should show: react-native-youtube-iframe@2.x.x
-```
-
----
-
-### Configuration
-
-**1. Get your computer's IP address**
-
-The mobile app needs to connect to your backend API.
-
-**Windows:**
-```bash
-ipconfig
-# Look for "IPv4 Address" under your active network adapter
-# Example: 192.168.1.100
-```
-
-**Mac:**
-```bash
-ifconfig | grep "inet " | grep -v 127.0.0.1
-# Example: inet 192.168.1.100
-```
-
-**Linux:**
-```bash
-hostname -I
-# Example: 192.168.1.100
-```
-
-**2. Update API configuration**
-
-Edit `src/services/api.js`:
-
-```javascript
-// BEFORE (won't work from phone):
-const API_BASE_URL = 'http://localhost:5000';
-
-// AFTER (use your computer's IP):
-const API_BASE_URL = 'http://192.168.1.100:5000';
-//                           ^^^^^^^^^^^^^^^^
-//                           Your computer's IP address
-```
-
-**Important:** 
-- Make sure your phone and computer are on the same WiFi network
-- Use your actual IP address, not `localhost`
-- Backend must be running on port 5000
-
-**3. Verify backend is accessible**
-
-Open on your phone's browser:
-```
-http://192.168.1.100:5000
-```
-
-You should see:
-```json
-{
-  "message": "Video App API",
-  "status": "running",
-  "version": "1.0.0"
-}
-```
-
----
-
-### Running the App
-
-**1. Start Expo**
-
-```bash
+# Start the development server
 npm start
 ```
 
-This will:
-- Start Metro bundler
-- Display a QR code in terminal
-- Open Expo DevTools in browser
+### Configuration
 
-**2. Open on your phone**
+**Important:** Update the API base URL with your computer's IP address.
 
-**iOS:**
-- Open Camera app
-- Point at QR code
-- Tap notification to open in Expo Go
+1. Find your computer's IP:
+   ```bash
+   # Windows
+   ipconfig
+   
+   # Mac/Linux
+   ifconfig | grep "inet "
+   ```
 
-**Android:**
-- Open Expo Go app
-- Tap "Scan QR Code"
-- Point at QR code
+2. Update `src/services/api.js`:
+   ```javascript
+   const API_BASE_URL = 'http://YOUR_COMPUTER_IP:5000';
+   // Example: 'http://192.168.1.100:5000'
+   ```
 
-**3. Wait for app to load**
-
-First load takes 30-60 seconds. Subsequent loads are faster.
-
-**4. Test the app**
-
-- You should see the Login screen
-- Try creating an account (Signup)
-- Login with your credentials
-- Browse videos on Dashboard
-- Tap a video to watch it
-- Check Settings to see your profile
+3. Restart Expo and reload the app
 
 ---
 
-## 🏗️ App Architecture
+## 📱 App Architecture
 
 ### Component Hierarchy
 
 ```
 App.js (Root)
-│
-├─ NavigationContainer
-│  │
-│  ├─ AuthStack (if not logged in)
-│  │  ├─ LoginScreen
-│  │  └─ SignupScreen
-│  │
-│  └─ MainStack (if logged in)
-│     ├─ DashboardScreen
-│     │  └─ VideoTile (component) × 2
-│     ├─ VideoPlayerScreen
-│     │  └─ YoutubePlayer (component)
-│     └─ SettingsScreen
-│
-├─ Services
-│  ├─ api.js (Axios instance + interceptors)
-│  └─ auth.js (Auth functions)
-│
-└─ Utils
-   └─ storage.js (AsyncStorage helpers)
+├── NavigationContainer
+│   ├── AuthStack (Unauthenticated)
+│   │   ├── LoginScreen
+│   │   └── SignupScreen
+│   │
+│   └── MainStack (Authenticated)
+│       ├── DashboardScreen
+│       │   └── VideoTile × 2
+│       ├── VideoPlayerScreen
+│       │   └── YoutubePlayer
+│       └── SettingsScreen
 ```
 
 ### Data Flow
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                     USER INTERACTION                         │
-└────────────────────────┬────────────────────────────────────┘
-                         │
-                         ↓
-┌─────────────────────────────────────────────────────────────┐
-│                    REACT COMPONENT                           │
-│  - User taps button                                         │
-│  - Component calls API function                             │
-└────────────────────────┬────────────────────────────────────┘
-                         │
-                         ↓
-┌─────────────────────────────────────────────────────────────┐
-│                    API CLIENT (axios)                        │
-│  - Adds JWT token to headers                                │
-│  - Makes HTTP request                                       │
-└────────────────────────┬────────────────────────────────────┘
-                         │
-                         ↓
-┌─────────────────────────────────────────────────────────────┐
-│                    BACKEND API                               │
-│  - Validates request                                        │
-│  - Processes business logic                                 │
-│  - Returns response                                         │
-└────────────────────────┬────────────────────────────────────┘
-                         │
-                         ↓
-┌─────────────────────────────────────────────────────────────┐
-│                    AXIOS INTERCEPTOR                         │
-│  - Receives response                                        │
-│  - If 401, triggers auto-logout                             │
-│  - Returns data to component                                │
-└────────────────────────┬────────────────────────────────────┘
-                         │
-                         ↓
-┌─────────────────────────────────────────────────────────────┐
-│                    REACT COMPONENT                           │
-│  - Updates state with data                                  │
-│  - Re-renders UI                                            │
-│  - User sees result                                         │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+graph TD
+    A[User Action] --> B[React Component]
+    B --> C[API Service]
+    C --> D[Axios Interceptor]
+    D --> E[Backend API]
+    E --> F[Response]
+    F --> D
+    D --> C
+    C --> B
+    B --> G[UI Update]
 ```
 
 ### Authentication Flow
 
 ```
-┌──────────────┐
-│  App Launch  │
-└──────┬───────┘
-       │
-       ↓
-┌──────────────────────┐
-│ Check AsyncStorage   │
-│ for JWT token        │
-└──────┬───────────────┘
-       │
-       ├─────── Token exists ──────────┐
-       │                               │
-       │                               ↓
-       │                     ┌──────────────────┐
-       │                     │ Show MainStack   │
-       │                     │ (Dashboard)      │
-       │                     └──────────────────┘
-       │
-       └─── No token ────────┐
-                             │
-                             ↓
-                   ┌──────────────────┐
-                   │ Show AuthStack   │
-                   │ (Login/Signup)   │
-                   └──────────────────┘
+App Launch
+    ↓
+Check AsyncStorage for Token
+    ↓
+├─ Token Found → Show MainStack (Dashboard)
+│
+└─ No Token → Show AuthStack (Login/Signup)
+         ↓
+    User Logs In
+         ↓
+    Save Token to AsyncStorage
+         ↓
+    Navigate to MainStack
 ```
 
 ---
 
-## 👤 User Flow
+## 🎨 Design System
 
-### Complete User Journey
+### Color Palette
 
-**1. First Launch**
+```javascript
+// Primary Colors
+PRIMARY_BLUE    = '#007AFF'  // Buttons, links, accents
+BACKGROUND      = '#f8f9fa'  // App background
+CARD_BG         = '#ffffff'  // Card background
 
-```
-User opens app
-   ↓
-App checks AsyncStorage for token
-   ↓
-No token found
-   ↓
-Shows Login Screen
-```
+// Text Colors
+TEXT_PRIMARY    = '#1a1a1a'  // Main text
+TEXT_SECONDARY  = '#666666'  // Secondary text
+TEXT_TERTIARY   = '#999999'  // Tertiary text
 
-**2. Signup**
-
-```
-User taps "Sign Up"
-   ↓
-Shows Signup Screen
-   ↓
-User enters: Name, Email, Password
-   ↓
-Taps "Sign Up" button
-   ↓
-POST /auth/signup to backend
-   ↓
-Backend creates user
-   ↓
-Success message shown
-   ↓
-Navigate back to Login Screen
+// Special
+PLAYER_BG       = '#000000'  // Video player background
+ERROR           = '#FF3B30'  // Error states
+SUCCESS         = '#34C759'  // Success states
 ```
 
-**3. Login**
+### Typography
 
-```
-User enters: Email, Password
-   ↓
-Taps "Login" button
-   ↓
-POST /auth/login to backend
-   ↓
-Backend verifies credentials
-   ↓
-Backend returns JWT token + user data
-   ↓
-Save token to AsyncStorage
-   ↓
-Save user data to AsyncStorage
-   ↓
-Navigation switches to MainStack
-   ↓
-Shows Dashboard
-```
+| Element | Size | Weight | Usage |
+|:--------|:-----|:-------|:------|
+| **Large Title** | 32px | Bold (700) | Screen headers |
+| **Title** | 20px | Bold (700) | Section headers |
+| **Headline** | 18px | Semibold (600) | Video titles |
+| **Body** | 16px | Regular (400) | Body text |
+| **Caption** | 14px | Medium (500) | Secondary info |
+| **Small** | 12px | Regular (400) | Labels |
 
-**4. Browse Videos**
+### Spacing System
 
-```
-Dashboard loads
-   ↓
-GET /dashboard (with JWT in header)
-   ↓
-Backend returns 2 videos with playback_tokens
-   ↓
-Shows 2 VideoTile components
-   ↓
-User can pull-to-refresh to reload
-```
-
-**5. Watch Video**
-
-```
-User taps VideoTile
-   ↓
-Navigate to VideoPlayerScreen
-   ↓
-GET /video/{id}/stream?token={playback_token} (with JWT)
-   ↓
-Backend verifies both tokens
-   ↓
-Backend returns YouTube embed URL
-   ↓
-Extract youtube_id from URL
-   ↓
-Pass ID to YoutubePlayer component
-   ↓
-Video plays with full controls
-```
-
-**6. View Settings**
-
-```
-User taps Settings icon (⚙️)
-   ↓
-Shows SettingsScreen
-   ↓
-Load user data from AsyncStorage
-   ↓
-Display name and email
-```
-
-**7. Logout**
-
-```
-User taps "Logout" button
-   ↓
-Confirmation dialog shown
-   ↓
-User confirms
-   ↓
-POST /auth/logout (with JWT)
-   ↓
-Clear AsyncStorage (token + user data)
-   ↓
-Navigation switches to AuthStack
-   ↓
-Shows Login Screen
-```
-
-**8. Automatic Logout**
-
-```
-JWT token expires (24 hours)
-   ↓
-User makes any API request
-   ↓
-Backend returns 401 Unauthorized
-   ↓
-Axios interceptor catches 401
-   ↓
-Automatically clears AsyncStorage
-   ↓
-User sees Login Screen
+```javascript
+SPACING = {
+  xs: 4,
+  sm: 8,
+  md: 12,
+  lg: 16,
+  xl: 20,
+  xxl: 24,
+}
 ```
 
 ---
@@ -581,78 +272,34 @@ User sees Login Screen
 ```
 frontend-repo/
 │
-├── App.js                      # Root component
-│   ├── Manages auth state
-│   ├── Checks for JWT token
-│   └── Shows AuthStack or MainStack
-│
 ├── src/
+│   ├── components/          # Reusable components
+│   │   └── VideoTile.js     # Video card component
 │   │
-│   ├── components/
-│   │   └── VideoTile.js        # Reusable video card component
-│   │       ├── Thumbnail display
-│   │       ├── Play button overlay
-│   │       ├── Title and description
-│   │       └── Tap handler
+│   ├── screens/             # Screen components
+│   │   ├── LoginScreen.js
+│   │   ├── SignupScreen.js
+│   │   ├── DashboardScreen.js
+│   │   ├── VideoPlayerScreen.js
+│   │   └── SettingsScreen.js
 │   │
-│   ├── screens/
-│   │   │
-│   │   ├── LoginScreen.js      # Login form
-│   │   │   ├── Email input
-│   │   │   ├── Password input
-│   │   │   ├── Login button
-│   │   │   └── Link to Signup
-│   │   │
-│   │   ├── SignupScreen.js     # Signup form
-│   │   │   ├── Name input
-│   │   │   ├── Email input
-│   │   │   ├── Password input
-│   │   │   ├── Signup button
-│   │   │   └── Link to Login
-│   │   │
-│   │   ├── DashboardScreen.js  # Main screen
-│   │   │   ├── Header with title
-│   │   │   ├── Settings button
-│   │   │   ├── FlatList of VideoTiles
-│   │   │   └── Pull-to-refresh
-│   │   │
-│   │   ├── VideoPlayerScreen.js # Video player
-│   │   │   ├── Back button
-│   │   │   ├── YoutubePlayer component
-│   │   │   ├── Video info card
-│   │   │   └── Error handling
-│   │   │
-│   │   └── SettingsScreen.js   # Settings/Profile
-│   │       ├── Back button
-│   │       ├── User profile card
-│   │       └── Logout button
+│   ├── services/            # API & business logic
+│   │   ├── api.js           # Axios configuration
+│   │   └── auth.js          # Authentication functions
 │   │
-│   ├── services/
-│   │   │
-│   │   ├── api.js               # Axios configuration
-│   │   │   ├── Base URL setup
-│   │   │   ├── Request interceptor (adds JWT)
-│   │   │   └── Response interceptor (handles 401)
-│   │   │
-│   │   └── auth.js              # Auth functions
-│   │       ├── signup()
-│   │       ├── login()
-│   │       ├── logout()
-│   │       └── getProfile()
-│   │
-│   └── utils/
-│       │
-│       └── storage.js           # AsyncStorage helpers
-│           ├── saveAuthToken()
-│           ├── getAuthToken()
-│           ├── removeAuthToken()
-│           ├── saveUserData()
-│           ├── getUserData()
-│           └── isLoggedIn()
+│   └── utils/               # Utility functions
+│       └── storage.js       # AsyncStorage helpers
 │
-├── package.json                # Dependencies
-├── app.json                    # Expo configuration
-└── README.md                   # This file
+├── screenshots/             # App screenshots
+│   ├── 01-login.png
+│   ├── 02-signup.png
+│   ├── 03-dashboard.png
+│   ├── 04-video-player.png
+│   └── 05-settings.png
+│
+├── App.js                   # Root component
+├── package.json             # Dependencies
+└── README.md                # This file
 ```
 
 ---
@@ -661,464 +308,285 @@ frontend-repo/
 
 ### Axios Configuration
 
-**File: `src/services/api.js`**
+The app uses Axios with interceptors for automatic token management:
 
 ```javascript
-import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
-// Backend API URL (use your computer's IP)
-const API_BASE_URL = 'http://192.168.1.100:5000';
-
-// Create axios instance
-const api = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  timeout: 10000, // 10 second timeout
+// Request Interceptor (adds JWT to headers)
+api.interceptors.request.use(async (config) => {
+  const token = await AsyncStorage.getItem('authToken');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
 });
 
-// Request interceptor - Adds JWT to every request
-api.interceptors.request.use(
-  async (config) => {
-    // Get token from storage
-    const token = await AsyncStorage.getItem('authToken');
-    
-    // If token exists, add to header
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
-// Response interceptor - Handle 401 errors (auto-logout)
+// Response Interceptor (handles 401 errors)
 api.interceptors.response.use(
-  (response) => {
-    return response;
-  },
+  (response) => response,
   async (error) => {
-    // If 401 (unauthorized), token expired
     if (error.response?.status === 401) {
-      // Clear token from storage
       await AsyncStorage.removeItem('authToken');
-      // User will be automatically redirected to login
+      // User automatically redirected to login
     }
-    
     return Promise.reject(error);
   }
 );
-
-export default api;
 ```
 
-**How It Works:**
+### API Endpoints Used
 
-1. **Request Interceptor**:
-   - Before every API call, reads JWT token from AsyncStorage
-   - Adds token to `Authorization` header
-   - Backend receives token and verifies it
-
-2. **Response Interceptor**:
-   - After every API response, checks for 401 status
-   - If 401 (token expired), clears token from storage
-   - App.js detects no token and shows Login screen
-
-3. **Timeout**:
-   - 10 second timeout prevents hanging requests
-   - Shows error if network is slow
+| Method | Endpoint | Purpose |
+|:-------|:---------|:--------|
+| POST | `/auth/signup` | Create new account |
+| POST | `/auth/login` | Authenticate user |
+| GET | `/auth/me` | Get user profile |
+| POST | `/auth/logout` | End session |
+| GET | `/dashboard` | Get video list |
+| GET | `/video/:id/stream` | Get video stream URL |
 
 ---
 
-### Authentication Service
+## 👤 User Flows
 
-**File: `src/services/auth.js`**
+### Complete User Journey
 
-```javascript
-import api from './api';
-import { saveAuthToken, saveUserData, removeAuthToken } from '../utils/storage';
+#### 1️⃣ First Launch & Signup
 
-// Signup function
-export const signup = async (name, email, password) => {
-  try {
-    const response = await api.post('/auth/signup', {
-      name,
-      email,
-      password,
-    });
-    
-    return { success: true, data: response.data };
-  } catch (error) {
-    return { 
-      success: false, 
-      error: error.response?.data?.error || 'Signup failed' 
-    };
-  }
-};
-
-// Login function
-export const login = async (email, password) => {
-  try {
-    const response = await api.post('/auth/login', {
-      email,
-      password,
-    });
-    
-    const { token, user } = response.data;
-    
-    // Save token and user data
-    await saveAuthToken(token);
-    await saveUserData(user);
-    
-    return { success: true, user };
-  } catch (error) {
-    return { 
-      success: false, 
-      error: error.response?.data?.error || 'Login failed' 
-    };
-  }
-};
-
-// Logout function
-export const logout = async () => {
-  try {
-    await api.post('/auth/logout');
-    await removeAuthToken();
-    return { success: true };
-  } catch (error) {
-    // Still clear local data even if backend call fails
-    await removeAuthToken();
-    return { success: true };
-  }
-};
+```
+Open App → No Token Found → Login Screen
+                                  ↓
+                         Tap "Sign Up"
+                                  ↓
+                         Signup Screen
+                                  ↓
+              Enter: Name, Email, Password
+                                  ↓
+                      POST /auth/signup
+                                  ↓
+                    Success Message
+                                  ↓
+                  Return to Login Screen
 ```
 
----
+#### 2️⃣ Login & Browse Videos
 
-## 🎨 Design System
-
-### Colors
-
-```javascript
-// Primary Colors
-PRIMARY_BLUE: '#007AFF'      // Buttons, links, accents
-BACKGROUND: '#f8f9fa'        // App background (light gray)
-CARD_BG: '#ffffff'           // Cards, tiles (white)
-
-// Text Colors
-TEXT_PRIMARY: '#1a1a1a'      // Main text (almost black)
-TEXT_SECONDARY: '#666666'    // Secondary text (medium gray)
-TEXT_TERTIARY: '#999999'     // Tertiary text (light gray)
-
-// Video Player
-PLAYER_BG: '#000000'         // Black background
-OVERLAY: 'rgba(0, 0, 0, 0.2)' // Semi-transparent overlay
-
-// States
-ERROR: '#FF3B30'             // Error messages, logout button
-SUCCESS: '#34C759'           // Success messages
+```
+Login Screen → Enter Credentials → POST /auth/login
+                                          ↓
+                                    Receive JWT
+                                          ↓
+                              Save to AsyncStorage
+                                          ↓
+                                   Dashboard
+                                          ↓
+                            GET /dashboard (with JWT)
+                                          ↓
+                          Show 2 Video Tiles
 ```
 
-### Typography
+#### 3️⃣ Watch Video
 
-```javascript
-// Font Sizes
-TITLE_LARGE: 32px            // Screen titles
-TITLE_MEDIUM: 20px           // Card titles
-TITLE_SMALL: 18px            // Video titles
-BODY: 16px                   // Body text
-BODY_SMALL: 14px             // Secondary body text
-CAPTION: 12px                // Captions, labels
-
-// Font Weights
-BOLD: '700'                  // Titles, important text
-SEMIBOLD: '600'              // Subtitles
-MEDIUM: '500'                // Secondary text
-REGULAR: '400'               // Body text
+```
+Tap Video Tile → VideoPlayerScreen
+                        ↓
+        GET /video/:id/stream?token=...
+                        ↓
+           Receive YouTube Embed URL
+                        ↓
+              Extract Video ID
+                        ↓
+            Pass to YoutubePlayer
+                        ↓
+               Video Plays
 ```
 
-### Spacing
+#### 4️⃣ Settings & Logout
 
-```javascript
-// Screen Padding
-SCREEN_HORIZONTAL: 20px      // Left/right padding
-SCREEN_VERTICAL: 16px        // Top/bottom padding
-
-// Card Spacing
-CARD_MARGIN: 16px            // Between cards
-CARD_PADDING: 16px           // Inside cards
-
-// Button Spacing
-BUTTON_PADDING_V: 15px       // Vertical padding
-BUTTON_PADDING_H: 30px       // Horizontal padding
 ```
-
-### Shadows (Elevation)
-
-```javascript
-// iOS
-shadowColor: '#000',
-shadowOffset: { width: 0, height: 2 },
-shadowOpacity: 0.15,
-shadowRadius: 8,
-
-// Android
-elevation: 3,
-```
-
-### Border Radius
-
-```javascript
-CARD: 12px                   // Cards, tiles
-BUTTON: 10px                 // Buttons
-CIRCULAR: 50%                // Settings button, play button
+Tap Settings Icon → SettingsScreen
+                          ↓
+               Show User Profile
+                          ↓
+                   Tap Logout
+                          ↓
+             Confirmation Dialog
+                          ↓
+           POST /auth/logout
+                          ↓
+        Clear AsyncStorage
+                          ↓
+          Show Login Screen
 ```
 
 ---
 
 ## 🐛 Troubleshooting
 
-### App Won't Connect to Backend
+### Network Errors
 
-**Problem:** "Network request failed" errors.
-
-**Solutions:**
-
-1. **Check backend is running:**
-```bash
-# Test from your computer's browser:
-http://localhost:5000/
-```
-
-2. **Check IP address is correct:**
-```javascript
-// In src/services/api.js
-const API_BASE_URL = 'http://YOUR_ACTUAL_IP:5000';
-// NOT localhost!
-```
-
-3. **Check same WiFi network:**
-- Phone and computer must be on same WiFi
-- Corporate/school WiFi might block connections
-- Try mobile hotspot
-
-4. **Test from phone's browser:**
-```
-http://YOUR_COMPUTER_IP:5000/
-```
-Should show API response.
-
-5. **Check firewall:**
-- Windows Firewall might block port 5000
-- Temporarily disable to test
-
----
-
-### "Error 153" When Playing Videos
-
-**Problem:** YouTube videos won't play.
+**Problem:** "Network Error" when trying to login
 
 **Solution:**
+1. Check backend is running
+2. Verify API URL in `src/services/api.js` uses your computer's IP
+3. Ensure phone and computer are on same WiFi
+4. Test backend from phone's browser: `http://YOUR_IP:5000`
 
-Verify you're using `react-native-youtube-iframe`:
+### Video Playback Issues
 
-```bash
-npm list react-native-youtube-iframe
-# Should show: react-native-youtube-iframe@2.x.x
-```
-
-If not installed:
-```bash
-npm install react-native-youtube-iframe
-```
-
-Make sure `VideoPlayerScreen.js` uses:
-```javascript
-import YoutubePlayer from 'react-native-youtube-iframe';
-```
-
----
-
-### App Crashes on Android
-
-**Problem:** App crashes when opening video player.
+**Problem:** Videos won't play or show "Error 153"
 
 **Solution:**
+1. Verify using `react-native-youtube-iframe` (not react-native-webview)
+2. Check Android layer type is set to 'hardware'
+3. Ensure playback token is valid
 
-Add to `VideoPlayerScreen.js`:
-```javascript
-<YoutubePlayer
-  videoId={youtubeId}
-  webViewProps={{
-    androidLayerType: 'hardware',  // Add this
-  }}
-/>
-```
+### App Won't Load
 
----
+**Problem:** App shows loading screen forever
 
-### Expo Go Shows "Something went wrong"
-
-**Problem:** Expo Go shows error screen.
-
-**Solutions:**
-
-1. **Clear Metro bundler cache:**
-```bash
-npm start -- --clear
-```
-
-2. **Reinstall dependencies:**
-```bash
-rm -rf node_modules
-npm install
-```
-
-3. **Check for syntax errors:**
-Look at Metro bundler logs in terminal.
+**Solution:**
+1. Clear Expo cache: `npm start -- --clear`
+2. Delete `node_modules` and reinstall: `rm -rf node_modules && npm install`
+3. Check for syntax errors in terminal logs
 
 ---
 
-### Login Works But Dashboard Shows Loading Forever
+## 📸 How to Add Your Screenshots
 
-**Problem:** Dashboard stuck on loading spinner.
+### Step 1: Take Screenshots
 
-**Solutions:**
+On your phone:
+- **Login Screen** - Before entering data
+- **Signup Screen** - Before entering data
+- **Dashboard** - Showing both videos
+- **Video Player** - While video is playing
+- **Settings** - Showing your profile
 
-1. **Check backend logs:**
+### Step 2: Transfer to Computer
+
+- **iPhone:** AirDrop, iCloud Photos, or email
+- **Android:** USB cable or Google Photos
+
+### Step 3: Organize Files
+
 ```bash
-# If using Docker:
-docker-compose logs backend
+# Create screenshots folder
+mkdir screenshots
 
-# Look for dashboard endpoint errors
+# Rename files clearly
+01-login.png
+02-signup.png
+03-dashboard.png
+04-video-player.png
+05-settings.png
+
+# Place in screenshots/ folder
 ```
 
-2. **Check JWT token:**
-```javascript
-// Add debug logging in DashboardScreen.js
-console.log('Fetching videos...');
-const response = await api.get('/dashboard');
-console.log('Response:', response.data);
-```
+### Step 4: Commit to Git
 
-3. **Verify backend has videos:**
 ```bash
-# If using Docker:
-docker-compose exec mongodb mongosh video_app
-
-# Then:
-db.videos.countDocuments()
-# Should return: 2
+git add screenshots/
+git add README.md
+git commit -m "docs: Add app screenshots"
+git push
 ```
+
+**Screenshots will automatically display in your README on GitHub!**
 
 ---
 
-## 📦 Building for Production
+## 🎯 Testing Checklist
 
-### Create APK (Android)
+Before submission, verify:
+
+- [ ] App installs and runs without errors
+- [ ] Signup creates new account successfully
+- [ ] Login authenticates and navigates to dashboard
+- [ ] Dashboard shows 2 videos with thumbnails
+- [ ] Tapping video opens player and plays video
+- [ ] Video controls work (play, pause, seek)
+- [ ] Settings shows correct user information
+- [ ] Logout clears token and returns to login
+- [ ] Pull-to-refresh updates dashboard
+- [ ] Network errors show user-friendly messages
+- [ ] App works on physical device via Expo Go
+
+---
+
+## 🚀 Building for Production
+
+### Android APK
 
 ```bash
 # Install EAS CLI
 npm install -g eas-cli
 
-# Login to Expo
+# Login
 eas login
-
-# Configure build
-eas build:configure
 
 # Build APK
 eas build --platform android --profile preview
 ```
 
-### Create IPA (iOS)
+### iOS IPA
 
 ```bash
-# Requires Apple Developer account ($99/year)
-
-# Build for TestFlight
+# Requires Apple Developer account
 eas build --platform ios --profile production
 ```
 
-### Over-the-Air Updates
-
-```bash
-# Publish update (no app store submission needed)
-eas update --branch production --message "Bug fixes"
-```
-
 ---
 
-## 📚 Additional Resources
+## 📚 Documentation Links
 
-- [React Native Documentation](https://reactnative.dev/)
+- [React Native Docs](https://reactnative.dev/docs/getting-started)
 - [Expo Documentation](https://docs.expo.dev/)
-- [React Navigation](https://reactnavigation.org/)
-- [react-native-youtube-iframe](https://github.com/LonelyCpp/react-native-youtube-iframe)
-- [AsyncStorage Documentation](https://react-native-async-storage.github.io/async-storage/)
+- [React Navigation](https://reactnavigation.org/docs/getting-started)
+- [Axios Documentation](https://axios-http.com/docs/intro)
+- [YouTube iFrame API](https://developers.google.com/youtube/iframe_api_reference)
 
 ---
 
-## 🤝 Contributing
+## 🤝 Assignment Requirements
 
-This app was built as part of a technical assignment to demonstrate:
-- React Native mobile development
-- API integration
-- JWT authentication
-- Navigation patterns
-- Clean code organization
-- Professional UI/UX design
+This frontend meets all assignment criteria:
 
----
-
-## 📄 License
-
-This project is for educational and demonstration purposes.
+✅ React Native mobile application  
+✅ Thin client architecture (zero business logic)  
+✅ JWT authentication with secure storage  
+✅ Signup & Login screens with validation  
+✅ Dashboard showing 2 videos from backend  
+✅ Video player with YouTube integration  
+✅ Settings screen with user profile  
+✅ Logout functionality  
+✅ Professional UI/UX design  
+✅ Proper navigation flow  
+✅ Error handling & loading states  
+✅ Clean, maintainable code structure  
 
 ---
 
 ## 👤 Author
 
-**Your Name**
-- GitHub: [Sworship](https://github.com/Swordship)
-- LinkedIn: [Monish S](https://www.linkedin.com/in/monish-s-a37482274)
+**Monish**  
+📧 Email: monishravi508@gmail.com
+🔗 GitHub: [@Swordship](https://github.com/Swordship)  
+💼 LinkedIn: [Monish S](https://www.linkedin.com/in/monish-s-a37482274/)  
 
 ---
 
-## 🎯 Assignment Checklist
+## 📄 License
 
-This frontend meets all assignment requirements:
-
-- ✅ React Native mobile app
-- ✅ Thin client (zero business logic)
-- ✅ JWT authentication flow
-- ✅ Signup and Login screens
-- ✅ Dashboard showing 2 videos
-- ✅ Video playback with controls
-- ✅ Settings screen with profile
-- ✅ Logout functionality
-- ✅ Professional UI design
-- ✅ Proper navigation
-- ✅ Error handling
-- ✅ Loading states
+This project was created as part of a technical assignment to demonstrate full-stack mobile development capabilities.
 
 ---
 
-**Mobile app is polished and production-ready!** 🎉
+<div align="center">
 
----
+### ⭐ Star this repo if you found it helpful!
 
-## 📝 How to Add Your Screenshots
+**Built with ❤️ using React Native & Expo**
 
-1. **Take screenshots on your phone** of all screens
-2. **Create screenshots folder** in repo root
-3. **Add images** to folder with clear names
-4. **Update this README** with actual screenshot paths
-5. **Commit and push** to GitHub
-
-**GitHub will automatically display the images!**
+</div>
