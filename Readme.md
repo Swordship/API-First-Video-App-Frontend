@@ -21,7 +21,7 @@ A beautiful, secure React Native mobile application for video streaming with JWT
 <table>
   <tr>
     <td align="center">
-      <img src="./screenshots/01-login.png" width="250" alt="Login Screen"/>
+      <img src="screenshots\01-login.jpeg" width="250" alt="Login Screen"/>
       <br/>
       <b>Login Screen</b>
       <br/>
