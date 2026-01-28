@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Backend URL - CHANGE THIS to your computer's IP
 // Find your IP: ipconfig (Windows) or ifconfig (Mac/Linux)
-const API_BASE_URL = 'http://10.190.100.194:5000';  // ← Your Flask server IP from logs
+const API_BASE_URL = 'http://10.82.145.194:5000';  // ← Your Flask server IP from logs
 
 // Create axios instance
 const api = axios.create({
